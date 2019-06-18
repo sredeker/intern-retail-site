@@ -5,6 +5,9 @@
 ## Build Setup
 
 ``` bash
+# install global dependencies
+npm install -g vue-cli nodemon
+
 # install dependencies
 npm install
 

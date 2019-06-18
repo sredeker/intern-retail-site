@@ -12,7 +12,8 @@ app.use(cors())
 app.listen(process.env.PORT || 8081)
 
 // Set up connection to MongoDB
-mongoose.connect('mongodb://localhost:27017/posts');
+const uri = "mongodb+srv://mevnAppUser:Sapient2019@mevn-intern-app-k67yb.mongodb.net/test?retryWrites=true&w=majority";
+mongoose.connect(uri);
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
 db.once("open", function(callback){
