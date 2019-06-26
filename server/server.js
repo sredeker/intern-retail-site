@@ -2,7 +2,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
+const mongoose = require('mongoose')
 
+// Start Express Server for API
 const app = express()
 app.use(morgan('combined'))
 app.use(bodyParser.json())
@@ -18,9 +20,18 @@ app.get('/posts', (req, res) => {
   }).sort({_id:-1})
 })
 
+// Fetch all categories
+app.get('/categories', (req, res) => {
+  Category.find({}, 'title', function (error, categories) {
+    if (error) { console.error(error); }
+    res.send({
+      categories: categories
+    })
+  }).sort({_id:-1})
+})
+
 app.listen(process.env.PORT || 8081)
 
-var mongoose = require('mongoose');
 mongoose.connect("mongodb+srv://mevnAppUser:Sapient2019@mevn-intern-app-k67yb.mongodb.net/test?retryWrites=true&w=majority");
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
@@ -90,5 +101,35 @@ app.delete('/posts/:id', (req, res) => {
     res.send({
       success: true
     })
+  })
+})
+
+var Category = require("./models/category");
+
+// Add new category
+app.post('/categories', (req, res) => {
+  var db = req.db;
+  var title = req.body.title;
+  var new_category = new Category({
+    title: title
+  })
+
+  new_category.save(function (error) {
+    if (error) {
+      console.log(error)
+    }
+    res.send({
+      success: true,
+      message: 'Category saved successfully!'
+    })
+  })
+})
+
+// Fetch single category
+app.get('/category/:id', (req, res) => {
+  var db = req.db;
+  Post.findById(req.params.id, 'title', function (error, post) {
+    if (error) { console.error(error); }
+    res.send(category)
   })
 })

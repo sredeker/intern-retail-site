@@ -14,7 +14,7 @@ export default {
   },
 
   getPost (params) {
-    return Api().get('posts/' + params.id)
+    return Api().get('post/' + params.id)
   },
 
   deletePost (id) {
