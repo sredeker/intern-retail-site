@@ -16,7 +16,7 @@
           <td>Category</td>
         </tr>
         <tr v-for="category in categories" :key="category">
-          <td>{{ category.title }}</td>
+          <td><router-link v-bind:to="{ name: 'ProductCategory' }" class="">{{ category.title }}</router-link></td>
         </tr>
       </table>
     </div>

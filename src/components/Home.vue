@@ -9,16 +9,6 @@
         <li><router-link v-bind:to="{ name: 'ProductManagement' }" class="">Product Management</router-link></li>
     </ul>
     </header>
-    <h1>Shirts</h1>
-    <div>
-      <router-link v-bind:to="{ name: 'Shirt1' }" class="">Shirt 1</router-link>
-    </div>
-    <div>
-      <router-link v-bind:to="{ name: 'Shirt2' }" class="">Shirt 2</router-link>
-    </div>
-    <div>
-      <router-link v-bind:to="{ name: 'Shirt3' }" class="">Shirt 3</router-link>
-    </div>
   </div>
 </template>
 <style type="text/css">

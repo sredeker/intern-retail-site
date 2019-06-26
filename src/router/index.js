@@ -7,6 +7,7 @@ import Shirt3 from '@/components/Shirt3'
 import Cart from '@/components/Cart'
 import Categories from '@/components/Categories'
 import ProductManagement from '@/components/ProductManagement'
+import ProductCategory from '@/components/ProductCategory'
 
 Vue.use(Router)
 
@@ -47,6 +48,11 @@ export default new Router({
       path: '/product-management',
       name: 'ProductManagement',
       component: ProductManagement
+    },
+    {
+      path: '/product-category',
+      name: 'ProductCategory',
+      component: ProductCategory
     }
   ]
 })
