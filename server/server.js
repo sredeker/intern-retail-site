@@ -30,6 +30,16 @@ app.get('/categories', (req, res) => {
   }).sort({_id:-1})
 })
 
+// Fetch all products
+app.get('/products', (req, res) => {
+  Category.find({}, 'title category', function (error, products) {
+    if (error) { console.error(error); }
+    res.send({
+      products: products
+    })
+  }).sort({_id:-1})
+})
+
 app.listen(process.env.PORT || 8081)
 
 mongoose.connect("mongodb+srv://mevnAppUser:Sapient2019@mevn-intern-app-k67yb.mongodb.net/test?retryWrites=true&w=majority");
@@ -131,5 +141,37 @@ app.get('/category/:id', (req, res) => {
   Post.findById(req.params.id, 'title', function (error, post) {
     if (error) { console.error(error); }
     res.send(category)
+  })
+})
+
+var Product = require("./models/product");
+
+// Add new product
+app.post('/products', (req, res) => {
+  var db = req.db;
+  var title = req.body.title;
+  var category = req.body.category;
+  var new_product = new Product({
+    title: title,
+    category: category
+  })
+
+  new_cproduct.save(function (error) {
+    if (error) {
+      console.log(error)
+    }
+    res.send({
+      success: true,
+      message: 'Product saved successfully!'
+    })
+  })
+})
+
+// Fetch single product
+app.get('/product/:id', (req, res) => {
+  var db = req.db;
+  Product.findById(req.params.id, 'title category', function (error, post) {
+    if (error) { console.error(error); }
+    res.send(product)
   })
 })

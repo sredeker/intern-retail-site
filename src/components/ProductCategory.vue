@@ -9,13 +9,13 @@
       </ul>
     </header>
     <h1>{{ this.$route.params.id }}</h1>
-    <div v-if="categories.length > 0" class="table-wrap">
+    <div v-if="products.length > 0" class="table-wrap">
       <table>
         <tr>
           <td>Product</td>
         </tr>
-        <tr v-for="category in categories" :key="category">
-          <td><router-link v-bind:to="'/categories/' + this.$route.params.id + '/' + 'product'" class="">{{ category.title }}</router-link></td>
+        <tr v-for="product in products" :key="product">
+          <td><router-link v-bind:to="'/categories/' + this.$route.params.id + '/' + product.title" class="">{{ product.title }}</router-link></td>
         </tr>
       </table>
     </div>
@@ -25,21 +25,21 @@
   </div>
 </template>
 <script>
-import CategoriesService from '@/services/CategoriesService'
+import ProductsService from '@/services/ProductsService'
 export default {
-  name: 'categories',
+  name: 'products',
   data () {
     return {
-      categories: []
+      products: []
     }
   },
   mounted () {
-    this.getCategories()
+    this.getProducts()
   },
   methods: {
-    async getCategories () {
-      const response = await CategoriesService.fetchCategories()
-      this.categories = response.data.categories
+    async getProducts () {
+      const response = await ProductsService.fetchProducts()
+      this.products = response.data.products
       console.log(response.data)
     }
   }

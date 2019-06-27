@@ -18,23 +18,60 @@
           <button class="app_post_btn" @click="addCategory">Add</button>
         </div>
       </div>
+    <div v-if="categories.length > 0" class="table-wrap">
+      <h1>Add Product to Category</h1>
+      Choose a Category
+      <select v-model="category">
+        <option disabled value="">Please select one</option>
+        <option v-for="cat in categories" :key="cat">{{ cat.title }}</option>
+      </select>
+      <span>Selected: {{ category }}</span>
+      <div class="form">
+        <div>
+          <input type="text" name="product" placeholder="PRODUCT" v-model="product">
+        </div>
+        <div>
+          <button class="app_post_btn" @click="addProduct">Add</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
-
 <script>
 import CategoriesService from '@/services/CategoriesService'
+import ProductsService from '@/services/ProductsService'
 export default {
-  name: 'NewCategory',
+  name: 'ProductManagement',
   data () {
     return {
-      title: ''
+      title: '',
+      product: '',
+      category: '',
+      categories: []
     }
   },
+  mounted () {
+    this.getCategories()
+  },
   methods: {
+    async getCategories () {
+      const response = await CategoriesService.fetchCategories()
+      this.categories = response.data.categories
+      console.log(response.data)
+    },
     async addCategory () {
       await CategoriesService.addCategory({
         title: this.title
       })
+      this.$router.push({ name: 'Categories' })
+    },
+    async addProduct () {
+      if (this.categories.includes(this.category)) {
+        await ProductsService.addProduct({
+          title: this.product,
+          category: this.category
+        })
+      }
       this.$router.push({ name: 'Categories' })
     }
   }
