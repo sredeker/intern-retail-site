@@ -8,14 +8,14 @@
         <li><router-link v-bind:to="{ name: 'ProductManagement' }" class="">Product Management</router-link></li>
       </ul>
     </header>
-    <h1>{{ this.$route.params.id }}</h1>
+    <h1>{{ currentCategory }}</h1>
     <div v-if="products.length > 0" class="table-wrap">
       <table>
         <tr>
           <td>Product</td>
         </tr>
         <tr v-for="product in products" :key="product">
-          <td v-if="'Shirts' == product.category"><router-link v-bind:to="'/categories/' + product.category + '/' + product.title" class="">{{ product.title }}</router-link></td>
+          <td><router-link v-bind:to="'/categories/' + product.category + '/' + product.title" class="">{{ product.title }}</router-link></td>
         </tr>
       </table>
     </div>
@@ -30,7 +30,8 @@ export default {
   name: 'products',
   data () {
     return {
-      products: []
+      products: [],
+      currentCategory: this.$route.params.id
     }
   },
   mounted () {
@@ -39,7 +40,12 @@ export default {
   methods: {
     async getProducts () {
       const response = await ProductsService.fetchProducts()
-      this.products = response.data.products
+      var i
+      for (i = 0; i < response.data.products.length; i++) {
+        if (response.data.products[i].category === this.currentCategory) {
+          this.products.push(response.data.products[i])
+        }
+      }
       console.log(response.data)
     }
   }
