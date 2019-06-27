@@ -11,5 +11,9 @@ export default {
 
   getProduct (params) {
     return Api().get('product/' + params.id)
+  },
+
+  deleteProduct (id) {
+    return Api().delete('products/' + id)
   }
 }

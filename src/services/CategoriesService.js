@@ -11,5 +11,9 @@ export default {
 
   getCategory (params) {
     return Api().get('category/' + params.id)
+  },
+
+  deleteCategory (id) {
+    return Api().delete('category/' + id)
   }
 }

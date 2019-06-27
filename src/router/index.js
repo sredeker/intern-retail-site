@@ -8,6 +8,7 @@ import Cart from '@/components/Cart'
 import Categories from '@/components/Categories'
 import ProductManagement from '@/components/ProductManagement'
 import ProductCategory from '@/components/ProductCategory'
+import Delete from '@/components/Delete'
 
 Vue.use(Router)
 
@@ -53,6 +54,11 @@ export default new Router({
       path: '/categories/:id',
       name: 'ProductCategory',
       component: ProductCategory
+    },
+    {
+      path: '/delete',
+      name: 'Delete',
+      component: Delete
     }
   ]
 })

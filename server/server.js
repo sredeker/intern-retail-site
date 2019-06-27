@@ -144,6 +144,20 @@ app.get('/category/:id', (req, res) => {
   })
 })
 
+// Delete a category
+app.delete('/categories/:id', (req, res) => {
+  var db = req.db;
+  Category.remove({
+    _id: req.params.id
+  }, function(err, post){
+    if (err)
+      res.send(err)
+    res.send({
+      success: true
+    })
+  })
+})
+
 var Product = require("./models/product");
 
 // Add new product
@@ -173,5 +187,19 @@ app.get('/product/:id', (req, res) => {
   Product.findById(req.params.id, 'title category', function (error, post) {
     if (error) { console.error(error); }
     res.send(product)
+  })
+})
+
+// Delete a product
+app.delete('/products/:id', (req, res) => {
+  var db = req.db;
+  Product.remove({
+    _id: req.params.id
+  }, function(err, post){
+    if (err)
+      res.send(err)
+    res.send({
+      success: true
+    })
   })
 })
