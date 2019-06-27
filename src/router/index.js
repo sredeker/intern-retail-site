@@ -50,7 +50,7 @@ export default new Router({
       component: ProductManagement
     },
     {
-      path: '/product-category',
+      path: '/categories/:id',
       name: 'ProductCategory',
       component: ProductCategory
     }

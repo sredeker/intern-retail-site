@@ -10,36 +10,10 @@
     </header>
     <h1>Category</h1>
     <div>
-      <button class="app_post_btn" @click="addPost">Add to cart</button>
+      There are no items in this category <br /><br />
     </div>
-    <h2>Rating: {{ calculateRating }}</h2>
   </div>
 </template>
-<script>
-import PostsService from '@/services/PostsService'
-export default {
-  name: 'NewPost',
-  data () {
-    return {
-      title: '',
-      description: ''
-    }
-  },
-  methods: {
-    async addPost () {
-      await PostsService.addPost({
-        title: 'Shirt 1',
-        description: 1
-      })
-    }
-  },
-  computed: {
-    calculateRating () {
-      return 'N/A'
-    }
-  }
-}
-</script>
 <style>
 .app_post_btn {
   background: #4d7ef7;
