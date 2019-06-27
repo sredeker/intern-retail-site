@@ -8,12 +8,43 @@
         <li><router-link v-bind:to="{ name: 'ProductManagement' }" class="">Product Management</router-link></li>
       </ul>
     </header>
-    <h1>Category</h1>
-    <div>
-      There are no items in this category <br /><br />
+    <h1>{{ this.$route.params.id }}</h1>
+    <div v-if="categories.length > 0" class="table-wrap">
+      <table>
+        <tr>
+          <td>Product</td>
+        </tr>
+        <tr v-for="category in categories" :key="category">
+          <td><router-link v-bind:to="'/categories/' + this.$route.params.id + '/' + 'product'" class="">{{ category.title }}</router-link></td>
+        </tr>
+      </table>
+    </div>
+    <div v-else>
+      There are no products in this category<br /><br />
     </div>
   </div>
 </template>
+<script>
+import CategoriesService from '@/services/CategoriesService'
+export default {
+  name: 'categories',
+  data () {
+    return {
+      categories: []
+    }
+  },
+  mounted () {
+    this.getCategories()
+  },
+  methods: {
+    async getCategories () {
+      const response = await CategoriesService.fetchCategories()
+      this.categories = response.data.categories
+      console.log(response.data)
+    }
+  }
+}
+</script>
 <style>
 .app_post_btn {
   background: #4d7ef7;

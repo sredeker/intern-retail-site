@@ -25,7 +25,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import CategoriesService from '@/services/CategoriesService'
 export default {
