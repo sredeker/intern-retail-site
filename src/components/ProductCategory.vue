@@ -15,7 +15,7 @@
           <td>Product</td>
         </tr>
         <tr v-for="product in products" :key="product">
-          <td><router-link v-bind:to="'/categories/' + this.$route.params.id + '/' + product.title" class="">{{ product.title }}</router-link></td>
+          <td v-if="'Shirts' == product.category"><router-link v-bind:to="'/categories/' + product.category + '/' + product.title" class="">{{ product.title }}</router-link></td>
         </tr>
       </table>
     </div>

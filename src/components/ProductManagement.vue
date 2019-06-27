@@ -66,12 +66,10 @@ export default {
       this.$router.push({ name: 'Categories' })
     },
     async addProduct () {
-      if (this.categories.includes(this.category)) {
-        await ProductsService.addProduct({
-          title: this.product,
-          category: this.category
-        })
-      }
+      await ProductsService.addProduct({
+        title: this.product,
+        category: this.category
+      })
       this.$router.push({ name: 'Categories' })
     }
   }

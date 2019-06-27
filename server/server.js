@@ -32,7 +32,7 @@ app.get('/categories', (req, res) => {
 
 // Fetch all products
 app.get('/products', (req, res) => {
-  Category.find({}, 'title category', function (error, products) {
+  Product.find({}, 'title category', function (error, products) {
     if (error) { console.error(error); }
     res.send({
       products: products
@@ -156,7 +156,7 @@ app.post('/products', (req, res) => {
     category: category
   })
 
-  new_cproduct.save(function (error) {
+  new_product.save(function (error) {
     if (error) {
       console.log(error)
     }
