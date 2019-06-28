@@ -31,6 +31,9 @@
           <input type="text" name="product" placeholder="PRODUCT" v-model="product">
         </div>
         <div>
+          <input type="text" name="price" placeholder="PRICE" v-model="price">
+        </div>
+        <div>
           <button class="app_post_btn" @click="addProduct">Add</button>
         </div>
       </div>
@@ -46,6 +49,7 @@ export default {
     return {
       title: '',
       product: '',
+      price: '',
       category: '',
       categories: []
     }
@@ -70,7 +74,8 @@ export default {
       await ProductsService.addProduct({
         title: this.product,
         category: this.category,
-        url: this.product.replace(/\s+/g, '-').toLowerCase()
+        url: this.product.replace(/\s+/g, '-').toLowerCase(),
+        price: this.price
       })
       this.$router.push({ name: 'Categories' })
     }

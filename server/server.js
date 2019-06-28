@@ -32,7 +32,7 @@ app.get('/categories', (req, res) => {
 
 // Fetch all products
 app.get('/products', (req, res) => {
-  Product.find({}, 'title category url', function (error, products) {
+  Product.find({}, 'title category url price', function (error, products) {
     if (error) { console.error(error); }
     res.send({
       products: products
@@ -168,10 +168,12 @@ app.post('/products', (req, res) => {
   var title = req.body.title;
   var category = req.body.category;
   var url = req.body.url;
+  var price = req.body.price;
   var new_product = new Product({
     title: title,
     category: category,
-    url: url
+    url: url,
+    price: price
   })
 
   new_product.save(function (error) {
@@ -188,7 +190,7 @@ app.post('/products', (req, res) => {
 // Fetch single product
 app.get('/product/:id', (req, res) => {
   var db = req.db;
-  Product.findById(req.params.id, 'title category url', function (error, post) {
+  Product.findById(req.params.id, 'title category url price', function (error, post) {
     if (error) { console.error(error); }
     res.send(product)
   })

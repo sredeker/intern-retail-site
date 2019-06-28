@@ -9,7 +9,7 @@
       </ul>
     </header>
     <h1>{{ currentProduct }}</h1>
-    <h2>Price:</h2>
+    <h2>Price: ${{ price }}.00</h2>
     <img src="../../build/logo.png">
     <div>
       <button class="app_post_btn" @click="addPost">Add to cart</button>
@@ -27,36 +27,36 @@ export default {
       title: '',
       description: '',
       currentProductURL: this.$route.params.id,
+      currentProduct: '',
+      price: '',
       products: []
     }
   },
   mounted () {
-    this.getProducts()
+    this.getProduct()
   },
   methods: {
     async addPost () {
       await PostsService.addPost({
         title: this.currentProduct,
-        description: 1
+        description: this.price
       })
     },
-    async getProducts () {
+    async getProduct () {
       const response = await ProductsService.fetchProducts()
       this.products = response.data.products
+      var i
+      for (i = 0; i < this.products.length; i++) {
+        if (this.products[i].url === this.currentProductURL) {
+          this.currentProduct = this.products[i].title
+          this.price = this.products[i].price
+        }
+      }
       console.log(response.data)
     }
   },
   computed: {
     calculateRating () {
-      return 'N/A'
-    },
-    currentProduct () {
-      var i
-      for (i = 0; i < this.products.length; i++) {
-        if (this.products[i].url === this.currentProductURL) {
-          return this.products[i].title
-        }
-      }
       return 'N/A'
     }
   }
