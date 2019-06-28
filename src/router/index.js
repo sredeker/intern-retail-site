@@ -7,6 +7,7 @@ import ProductManagement from '@/components/ProductManagement'
 import ProductCategory from '@/components/ProductCategory'
 import Product from '@/components/Product'
 import Delete from '@/components/Delete'
+import EditProduct from '@/components/EditProduct'
 
 Vue.use(Router)
 
@@ -47,6 +48,11 @@ export default new Router({
       path: '/delete',
       name: 'Delete',
       component: Delete
+    },
+    {
+      path: '/edit',
+      name: 'EditProduct',
+      component: EditProduct
     }
   ]
 })

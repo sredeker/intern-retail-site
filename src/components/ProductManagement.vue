@@ -7,6 +7,8 @@
         <li><router-link v-bind:to="{ name: 'Cart' }" class="">Cart</router-link></li>
         <li><router-link v-bind:to="{ name: 'Categories' }" class="">Categories</router-link></li>
         <li><router-link v-bind:to="{ name: 'ProductManagement' }" class="">Product Management</router-link></li>
+        <li><router-link v-bind:to="{ name: 'Delete' }" class="">Delete</router-link></li>
+        <li><router-link v-bind:to="{ name: 'EditProduct' }" class="">Edit Product</router-link></li>
     </ul>
     </header>
     <h1>Add Category</h1>

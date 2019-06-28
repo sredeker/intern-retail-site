@@ -196,6 +196,27 @@ app.get('/product/:id', (req, res) => {
   })
 })
 
+// Update a product
+app.put('/products/:id', (req, res) => {
+  var db = req.db;
+  Product.findById(req.params.id, 'title category url price', function (error, post) {
+    if (error) { console.error(error); }
+
+    post.title = req.body.title
+    post.category = req.body.category
+    post.url = req.body.url
+    post.price = req.body.price
+    post.save(function (error) {
+      if (error) {
+        console.log(error)
+      }
+      res.send({
+        success: true
+      })
+    })
+  })
+})
+
 // Delete a product
 app.delete('/products/:id', (req, res) => {
   var db = req.db;
