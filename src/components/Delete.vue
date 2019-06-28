@@ -1,7 +1,6 @@
 
 <template>
   <div class="posts">
-    <h1>Cart</h1>
       <table>
         <tr>
           <td>Category</td>

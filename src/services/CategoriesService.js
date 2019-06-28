@@ -14,6 +14,6 @@ export default {
   },
 
   deleteCategory (id) {
-    return Api().delete('category/' + id)
+    return Api().delete('categories/' + id)
   }
 }

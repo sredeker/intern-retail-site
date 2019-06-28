@@ -22,7 +22,7 @@ app.get('/posts', (req, res) => {
 
 // Fetch all categories
 app.get('/categories', (req, res) => {
-  Category.find({}, 'title', function (error, categories) {
+  Category.find({}, 'title url', function (error, categories) {
     if (error) { console.error(error); }
     res.send({
       categories: categories
@@ -32,7 +32,7 @@ app.get('/categories', (req, res) => {
 
 // Fetch all products
 app.get('/products', (req, res) => {
-  Product.find({}, 'title category', function (error, products) {
+  Product.find({}, 'title category url', function (error, products) {
     if (error) { console.error(error); }
     res.send({
       products: products
@@ -120,8 +120,10 @@ var Category = require("./models/category");
 app.post('/categories', (req, res) => {
   var db = req.db;
   var title = req.body.title;
+  var url = req.body.url;
   var new_category = new Category({
-    title: title
+    title: title,
+    url: url
   })
 
   new_category.save(function (error) {
@@ -138,7 +140,7 @@ app.post('/categories', (req, res) => {
 // Fetch single category
 app.get('/category/:id', (req, res) => {
   var db = req.db;
-  Post.findById(req.params.id, 'title', function (error, post) {
+  Post.findById(req.params.id, 'title url', function (error, post) {
     if (error) { console.error(error); }
     res.send(category)
   })
@@ -165,9 +167,11 @@ app.post('/products', (req, res) => {
   var db = req.db;
   var title = req.body.title;
   var category = req.body.category;
+  var url = req.body.url;
   var new_product = new Product({
     title: title,
-    category: category
+    category: category,
+    url: url
   })
 
   new_product.save(function (error) {
@@ -184,7 +188,7 @@ app.post('/products', (req, res) => {
 // Fetch single product
 app.get('/product/:id', (req, res) => {
   var db = req.db;
-  Product.findById(req.params.id, 'title category', function (error, post) {
+  Product.findById(req.params.id, 'title category url', function (error, post) {
     if (error) { console.error(error); }
     res.send(product)
   })

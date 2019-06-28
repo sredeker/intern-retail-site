@@ -4,6 +4,8 @@
       <ul>
         <li><router-link v-bind:to="{ name: 'Home' }" class="">Home</router-link></li>
         <li><router-link v-bind:to="{ name: 'Cart' }" class="">Cart</router-link></li>
+        <li><router-link v-bind:to="{ name: 'Categories' }" class="">Categories</router-link></li>
+        <li><router-link v-bind:to="{ name: 'ProductManagement' }" class="">Product Management</router-link></li>
       </ul>
     </header>
     <h1>{{ currentProduct }}</h1>
@@ -24,9 +26,8 @@ export default {
     return {
       title: '',
       description: '',
-      currentProduct: this.$route.params.id,
-      products: [],
-      prod: ''
+      currentProductURL: this.$route.params.id,
+      products: []
     }
   },
   mounted () {
@@ -35,23 +36,27 @@ export default {
   methods: {
     async addPost () {
       await PostsService.addPost({
-        title: 'Shirt 1',
+        title: this.currentProduct,
         description: 1
       })
     },
     async getProducts () {
       const response = await ProductsService.fetchProducts()
-      var i
-      for (i = 0; i < response.data.products.length; i++) {
-        if (response.data.products[i].category === this.currentCategory) {
-          this.products.push(response.data.products[i])
-        }
-      }
+      this.products = response.data.products
       console.log(response.data)
     }
   },
   computed: {
     calculateRating () {
+      return 'N/A'
+    },
+    currentProduct () {
+      var i
+      for (i = 0; i < this.products.length; i++) {
+        if (this.products[i].url === this.currentProductURL) {
+          return this.products[i].title
+        }
+      }
       return 'N/A'
     }
   }

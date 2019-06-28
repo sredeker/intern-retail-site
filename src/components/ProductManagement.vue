@@ -61,14 +61,16 @@ export default {
     },
     async addCategory () {
       await CategoriesService.addCategory({
-        title: this.title
+        title: this.title,
+        url: this.title.replace(/\s+/g, '-').toLowerCase()
       })
       this.$router.push({ name: 'Categories' })
     },
     async addProduct () {
       await ProductsService.addProduct({
         title: this.product,
-        category: this.category
+        category: this.category,
+        url: this.product.replace(/\s+/g, '-').toLowerCase()
       })
       this.$router.push({ name: 'Categories' })
     }
