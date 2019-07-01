@@ -9,7 +9,7 @@
       </ul>
     </header>
     <h1>{{ currentProduct }}</h1>
-    <h2>Price: ${{ price }}.00</h2>
+    <h2>Price: ${{ price.toFixed(2) }}</h2>
     <img src="../../build/logo.png">
     <div>
       <button class="app_post_btn" @click="addPost">Add to cart</button>

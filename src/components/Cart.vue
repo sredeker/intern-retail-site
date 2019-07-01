@@ -25,7 +25,7 @@
           </td>
         </tr>
       </table>
-      Total price: ${{ totalPrice }}.00
+      Total price: ${{ totalPrice.toFixed(2) }}
     </div>
     <div v-else>
       There are no items in the cart <br /><br />
