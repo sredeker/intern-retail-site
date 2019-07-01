@@ -1,13 +1,20 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <globalHeader></globalHeader>
+    <div class="main-content">
+      <router-view/>
+    </div>
   </div>
 </template>
 
 <script>
+import GlobalHeader from '@/components/GlobalHeader'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    'globalHeader': GlobalHeader
+  }
 }
 </script>
 
@@ -18,6 +25,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: get-color(black);
-  margin-top: 60px;
+}
+
+.main-content {
+    @include clearfix;
 }
 </style>
