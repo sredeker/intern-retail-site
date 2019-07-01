@@ -8,14 +8,14 @@
         <li><router-link v-bind:to="{ name: 'ProductManagement' }" class="">Product Management</router-link></li>
       </ul>
     </header>
-    <h1>{{ this.$route.params.id }}</h1>
+    <h1>{{ currentCategory }}</h1>
     <div v-if="products.length > 0" class="table-wrap">
       <table>
         <tr>
           <td>Product</td>
         </tr>
         <tr v-for="product in products" :key="product">
-          <td v-if="'Shirts' == product.category"><router-link v-bind:to="'/categories/' + product.category + '/' + product.title" class="">{{ product.title }}</router-link></td>
+          <td><router-link v-bind:to="'/categories/' + currentCategoryURL + '/' + product.url" class="">{{ product.title }}</router-link></td>
         </tr>
       </table>
     </div>
@@ -25,22 +25,48 @@
   </div>
 </template>
 <script>
+import CategoriesService from '@/services/CategoriesService'
 import ProductsService from '@/services/ProductsService'
 export default {
   name: 'products',
   data () {
     return {
-      products: []
+      products: [],
+      currentCategoryURL: this.$route.params.id,
+      categories: [],
+      currCategory: ''
     }
   },
   mounted () {
+    this.getCategories()
     this.getProducts()
   },
   methods: {
+    async getCategories () {
+      const response = await CategoriesService.fetchCategories()
+      this.categories = response.data.categories
+      console.log(response.data)
+    },
     async getProducts () {
       const response = await ProductsService.fetchProducts()
-      this.products = response.data.products
+      var i
+      for (i = 0; i < response.data.products.length; i++) {
+        if (response.data.products[i].category.replace(/\s+/g, '-').toLowerCase() === this.currentCategoryURL) {
+          this.products.push(response.data.products[i])
+        }
+      }
       console.log(response.data)
+    }
+  },
+  computed: {
+    currentCategory () {
+      var i
+      for (i = 0; i < this.categories.length; i++) {
+        if (this.categories[i].url === this.currentCategoryURL) {
+          return this.categories[i].title
+        }
+      }
+      return 'N/A'
     }
   }
 }

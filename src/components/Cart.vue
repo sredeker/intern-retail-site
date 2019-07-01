@@ -19,13 +19,13 @@
         </tr>
         <tr v-for="post in posts" :key="post">
           <td>{{ post.title }}</td>
-          <td>${{ post.description }}.00</td>
+          <td>${{ post.description.toFixed(2) }}</td>
           <td align="center">
             <a href="#" @click="deletePost(post._id)">Delete</a>
           </td>
         </tr>
       </table>
-      Total price: ${{ totalPrice }}.00
+      Total price: ${{ totalPrice.toFixed(2) }}
     </div>
     <div v-else>
       There are no items in the cart <br /><br />
