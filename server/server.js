@@ -40,6 +40,16 @@ app.get('/products', (req, res) => {
   }).sort({_id:-1})
 })
 
+// Fetch all reviews
+app.get('/reviews', (req, res) => {
+  Review.find({}, 'product rating review', function (error, reviews) {
+    if (error) { console.error(error); }
+    res.send({
+      reviews: reviews
+    })
+  }).sort({_id:-1})
+})
+
 app.listen(process.env.PORT || 8081)
 
 mongoose.connect("mongodb+srv://mevnAppUser:Sapient2019@mevn-intern-app-k67yb.mongodb.net/test?retryWrites=true&w=majority");
@@ -221,6 +231,74 @@ app.put('/products/:id', (req, res) => {
 app.delete('/products/:id', (req, res) => {
   var db = req.db;
   Product.remove({
+    _id: req.params.id
+  }, function(err, post){
+    if (err)
+      res.send(err)
+    res.send({
+      success: true
+    })
+  })
+})
+
+var Review = require("./models/review");
+
+// Add new review
+app.post('/reviews', (req, res) => {
+  var db = req.db;
+  var product = req.body.product;
+  var rating = req.body.rating;
+  var review = req.body.review;
+  var new_review = new Review({
+    product: product,
+    rating: rating,
+    review: review
+  })
+
+  new_review.save(function (error) {
+    if (error) {
+      console.log(error)
+    }
+    res.send({
+      success: true,
+      message: 'Review saved successfully!'
+    })
+  })
+})
+
+// Fetch single review
+app.get('/review/:id', (req, res) => {
+  var db = req.db;
+  Review.findById(req.params.id, 'product rating review', function (error, post) {
+    if (error) { console.error(error); }
+    res.send(review)
+  })
+})
+
+// Update a review
+app.put('/reviews/:id', (req, res) => {
+  var db = req.db;
+  Review.findById(req.params.id, 'product rating review', function (error, post) {
+    if (error) { console.error(error); }
+
+    post.product = req.body.product
+    post.rating = req.body.rating
+    post.review = req.body.review
+    post.save(function (error) {
+      if (error) {
+        console.log(error)
+      }
+      res.send({
+        success: true
+      })
+    })
+  })
+})
+
+// Delete a review
+app.delete('/reviews/:id', (req, res) => {
+  var db = req.db;
+  Review.remove({
     _id: req.params.id
   }, function(err, post){
     if (err)

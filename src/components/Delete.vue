@@ -1,6 +1,7 @@
 
 <template>
   <div class="posts">
+    <h1>Delete a Product or Category</h1>
       <table>
         <tr>
           <td>Category</td>
