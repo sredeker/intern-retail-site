@@ -7,6 +7,8 @@
         <li><router-link v-bind:to="{ name: 'Cart' }" class="">Cart</router-link></li>
         <li><router-link v-bind:to="{ name: 'Categories' }" class="">Categories</router-link></li>
         <li><router-link v-bind:to="{ name: 'ProductManagement' }" class="">Product Management</router-link></li>
+        <li><router-link v-bind:to="{ name: 'Delete' }" class="">Delete</router-link></li>
+        <li><router-link v-bind:to="{ name: 'EditProduct' }" class="">Edit Product</router-link></li>
     </ul>
     </header>
     <h1>Add Category</h1>
@@ -31,6 +33,9 @@
           <input type="text" name="product" placeholder="PRODUCT" v-model="product">
         </div>
         <div>
+          <input type="text" name="price" placeholder="PRICE" v-model="price">
+        </div>
+        <div>
           <button class="app_post_btn" @click="addProduct">Add</button>
         </div>
       </div>
@@ -46,6 +51,7 @@ export default {
     return {
       title: '',
       product: '',
+      price: '',
       category: '',
       categories: []
     }
@@ -61,14 +67,17 @@ export default {
     },
     async addCategory () {
       await CategoriesService.addCategory({
-        title: this.title
+        title: this.title,
+        url: this.title.replace(/\s+/g, '-').toLowerCase()
       })
       this.$router.push({ name: 'Categories' })
     },
     async addProduct () {
       await ProductsService.addProduct({
         title: this.product,
-        category: this.category
+        category: this.category,
+        url: this.product.replace(/\s+/g, '-').toLowerCase(),
+        price: this.price
       })
       this.$router.push({ name: 'Categories' })
     }
