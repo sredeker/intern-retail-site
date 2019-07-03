@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="logo">
-      <img src="../assets/logo.png">
+      <img @click="goToHome()" src="../assets/logo.png">
     </div>
     <nav>
       <router-link v-bind:to="{ name: 'Home' }" class="">Home</router-link>
@@ -9,7 +9,7 @@
       | <div class="dropdown">
           <button class="dropbtn"><router-link v-bind:to="{ name: 'Categories' }" class="">Categories</router-link></button>
             <div v-if="categories.length > 0" class="dropdown-content">
-              <router-link v-for="category in categories" :key="category" v-bind:to="'/categories/' + category.url" class="">{{ category.title }}</router-link>
+              <router-link v-for="category in categories" :key="category" v-bind:to="'/categories/' + category.url" class="" @click="reloadPage()">{{ category.title }}</router-link>
             </div>
           </div>
       | <router-link v-bind:to="{ name: 'ProductManagement' }" class="">Product Management</router-link>
@@ -23,7 +23,8 @@ export default {
   name: 'GlobalHeader',
   data () {
     return {
-      categories: []
+      categories: [],
+      url: '/categories/' + this.$route.params.id
     }
   },
   mounted () {
@@ -34,6 +35,13 @@ export default {
       const response = await CategoriesService.fetchCategories()
       this.categories = response.data.categories
       console.log(response.data)
+    },
+    reloadPage () {
+      this.getCategories()
+      this.$router.push({ name: this.url })
+    },
+    goToHome () {
+      this.$router.push({ name: 'Home' })
     }
   }
 }
