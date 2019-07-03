@@ -1,14 +1,6 @@
 
 <template>
   <div class="posts">
-    <header>
-      <ul>
-        <li><router-link v-bind:to="{ name: 'Home' }" class="">Home</router-link></li>
-        <li><router-link v-bind:to="{ name: 'Cart' }" class="">Cart</router-link></li>
-        <li><router-link v-bind:to="{ name: 'Categories' }" class="">Categories</router-link></li>
-        <li><router-link v-bind:to="{ name: 'ProductManagement' }" class="">Product Management</router-link></li>
-    </ul>
-    </header>
   </div>
 </template>
 <style type="text/css">
