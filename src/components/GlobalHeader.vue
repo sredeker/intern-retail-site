@@ -9,7 +9,7 @@
       | <div class="dropdown">
           <button class="dropbtn"><router-link v-bind:to="{ name: 'Categories' }" class="">Categories</router-link></button>
             <div v-if="categories.length > 0" class="dropdown-content">
-              <router-link v-for="category in categories" :key="category" v-bind:to="'/categories/' + category.url" class="" @click="reloadPage()">{{ category.title }}</router-link>
+              <router-link v-for="category in categories" :key="category" v-bind:to="'/categories/' + category.url" class="" @click="reloadPage(category.url)">{{ category.title }}</router-link>
             </div>
           </div>
       | <router-link v-bind:to="{ name: 'ProductManagement' }" class="">Product Management</router-link>
@@ -24,7 +24,7 @@ export default {
   data () {
     return {
       categories: [],
-      url: '/categories/' + this.$route.params.id
+      url: this.$route.params.id
     }
   },
   mounted () {
@@ -36,12 +36,17 @@ export default {
       this.categories = response.data.categories
       console.log(response.data)
     },
-    reloadPage () {
-      this.getCategories()
-      this.$router.push({ name: this.url })
+    reloadPage (url) {
+      this.url = url
     },
     goToHome () {
       this.$router.push({ name: 'Home' })
+    }
+  },
+  watch: {
+    url: function () {
+      console.log(this.url)
+      this.$router.go()
     }
   }
 }
