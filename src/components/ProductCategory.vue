@@ -1,12 +1,12 @@
 <template>
   <div class="posts">
     <h1>{{ currentCategory }}</h1>
-    <div v-if="products.length > 0" class="table-wrap">
+    <div v-if="currProducts.length > 0" class="table-wrap">
       <table>
         <tr>
           <td>Product</td>
         </tr>
-        <tr v-for="product in products" :key="product">
+        <tr v-for="product in currProducts" :key="product">
           <td><router-link v-bind:to="'/categories/' + currentCategoryURL + '/' + product.url" class="">{{ product.title }}</router-link></td>
         </tr>
       </table>
@@ -24,9 +24,8 @@ export default {
   data () {
     return {
       products: [],
-      currentCategoryURL: this.$route.params.id,
-      categories: [],
-      currCategory: ''
+      currProducts: [],
+      categories: []
     }
   },
   mounted () {
@@ -41,13 +40,15 @@ export default {
     },
     async getProducts () {
       const response = await ProductsService.fetchProducts()
+      this.products = response.data.products
+      console.log(response.data)
       var i
-      for (i = 0; i < response.data.products.length; i++) {
-        if (response.data.products[i].category.replace(/\s+/g, '-').toLowerCase() === this.currentCategoryURL) {
-          this.products.push(response.data.products[i])
+      this.currProducts = []
+      for (i = 0; i < this.products.length; i++) {
+        if (this.products[i].category.replace(/\s+/g, '-').toLowerCase() === this.currentCategoryURL) {
+          this.currProducts.push(this.products[i])
         }
       }
-      console.log(response.data)
     }
   },
   computed: {
@@ -59,6 +60,20 @@ export default {
         }
       }
       return 'N/A'
+    },
+    currentCategoryURL () {
+      return this.$route.params.id
+    }
+  },
+  watch: {
+    currentCategoryURL: function () {
+      var i
+      this.currProducts = []
+      for (i = 0; i < this.products.length; i++) {
+        if (this.products[i].category.replace(/\s+/g, '-').toLowerCase() === this.currentCategoryURL) {
+          this.currProducts.push(this.products[i])
+        }
+      }
     }
   }
 }
