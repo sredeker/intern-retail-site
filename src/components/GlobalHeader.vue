@@ -29,7 +29,7 @@ export default {
   data () {
     return {
       categories: [],
-      url: '/categories/' + this.$route.params.id
+      url: this.$route.params.id
     }
   },
   mounted () {
@@ -41,12 +41,17 @@ export default {
       this.categories = response.data.categories
       console.log(response.data)
     },
-    reloadPage () {
-      this.getCategories()
-      this.$router.push({ name: this.url })
+    reloadPage (url) {
+      this.url = url
     },
     goToHome () {
       this.$router.push({ name: 'Home' })
+    }
+  },
+  watch: {
+    url: function () {
+      console.log(this.url)
+      this.$router.go()
     }
   }
 }
