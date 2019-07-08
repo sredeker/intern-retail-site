@@ -1,19 +1,24 @@
 <template>
   <header>
-    <div class="logo">
-      <img @click="goToHome()" src="../assets/logo.png">
-    </div>
-    <nav>
-      <router-link v-bind:to="{ name: 'Home' }" class="">Home</router-link>
-      | <router-link v-bind:to="{ name: 'Cart' }" class="">Cart</router-link>
-      | <div class="dropdown">
-          <button class="dropbtn"><router-link v-bind:to="{ name: 'Categories' }" class="">Categories</router-link></button>
-            <div v-if="categories.length > 0" class="dropdown-content">
-              <router-link v-for="category in categories" :key="category" v-bind:to="'/categories/' + category.url" class="" @click="reloadPage(category.url)">{{ category.title }}</router-link>
+    <div id="global-header">
+      <div class="logo">
+        <img @click="goToHome()" src="../assets/nf-logo.png" style="width:128px;height:128px;">
+      </div>
+      <nav>
+        <div class="headerlinks">
+          <router-link v-bind:to="{ name: 'Home' }" class="">HOME</router-link>
+          | <router-link v-bind:to="{ name: 'Cart' }" class="">CART</router-link>
+          | <div class="dropdown">
+              <button class="dropbtn"><router-link v-bind:to="{ name: 'Categories' }" class="">CATEGORIES</router-link></button>
+                <div v-if="categories.length > 0" class="dropdown-content">
+                  <router-link v-for="category in categories" :key="category" v-bind:to="'/categories/' + category.url" class="" @click="reloadPage()">{{ category.title }}</router-link>
+                </div>
             </div>
-          </div>
-      | <router-link v-bind:to="{ name: 'ProductManagement' }" class="">Product Management</router-link>
-    </nav>
+          | <router-link v-bind:to="{ name: 'ProductManagement' }" class="">PRODUCT MANAGEMENT</router-link>
+        </div>
+        <input type="text" placeholder="Search">
+      </nav>
+    </div>
   </header>
 </template>
 
@@ -61,12 +66,18 @@ header {
   float: left;
 }
 
+.headerlinks {
+  float: left;
+}
+
+.headerlinks a:hover {color: #ff0000}
+
 /* Dropdown Button */
 .dropbtn {
-  background-color: #4CAF50;
+  /*background-color: #4CAF50; */
   color: white;
   padding: 16px;
-  font-size: 16px;
+  font-size: 18px;
   border: none;
 }
 
@@ -80,7 +91,7 @@ header {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
+  background-color: #ffffff;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -94,6 +105,15 @@ header {
   display: block;
 }
 
+.global-header input[type=text] {
+  float: right;
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+}
+
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {background-color: #ddd;}
 
@@ -101,5 +121,5 @@ header {
 .dropdown:hover .dropdown-content {display: block;}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+/*.dropdown:hover .dropbtn {background-color: #3e8e41;} */
 </style>
