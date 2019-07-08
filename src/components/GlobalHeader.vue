@@ -16,7 +16,12 @@
             </div>
           | <router-link v-bind:to="{ name: 'ProductManagement' }" class="">PRODUCT MANAGEMENT</router-link>
         </div>
-        <input type="text" placeholder="Search">
+        <div class="search-container" role="search">
+          <form action="/action_page.php">
+            <input type="text" placeholder="Search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
       </nav>
     </div>
   </header>
@@ -55,6 +60,11 @@ export default {
 <style lang="scss" scoped>
 header {
  @include clearfix;
+}
+
+.global-header {
+  font-family: Helvetica;
+  font-style: bold;
 }
 
 .logo {
@@ -107,6 +117,21 @@ header {
   margin-top: 8px;
   margin-right: 16px;
   font-size: 17px;
+}
+
+.search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.search-container button:hover {
+  background: #ccc;
 }
 
 /* Change color of dropdown links on hover */
