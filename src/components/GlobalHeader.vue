@@ -1,21 +1,24 @@
 <template>
   <header>
-    <div class="logo">
-      <img @click="goToHome()" src="../assets/nf-logo.png" style="width:128px;height:128px;">
-    </div>
-    <nav>
-      <div class="headerlinks">
-        <router-link v-bind:to="{ name: 'Home' }" class="">HOME</router-link>
-        | <router-link v-bind:to="{ name: 'Cart' }" class="">CART</router-link>
-        | <div class="dropdown">
-            <button class="dropbtn"><router-link v-bind:to="{ name: 'Categories' }" class="">CATEGORIES</router-link></button>
-              <div v-if="categories.length > 0" class="dropdown-content">
-                <router-link v-for="category in categories" :key="category" v-bind:to="'/categories/' + category.url" class="" @click="reloadPage()">{{ category.title }}</router-link>
-              </div>
-          </div>
-        | <router-link v-bind:to="{ name: 'ProductManagement' }" class="">PRODUCT MANAGEMENT</router-link>
+    <div id="global-header">
+      <div class="logo">
+        <img @click="goToHome()" src="../assets/nf-logo.png" style="width:128px;height:128px;">
       </div>
-    </nav>
+      <nav>
+        <div class="headerlinks">
+          <router-link v-bind:to="{ name: 'Home' }" class="">HOME</router-link>
+          | <router-link v-bind:to="{ name: 'Cart' }" class="">CART</router-link>
+          | <div class="dropdown">
+              <button class="dropbtn"><router-link v-bind:to="{ name: 'Categories' }" class="">CATEGORIES</router-link></button>
+                <div v-if="categories.length > 0" class="dropdown-content">
+                  <router-link v-for="category in categories" :key="category" v-bind:to="'/categories/' + category.url" class="" @click="reloadPage()">{{ category.title }}</router-link>
+                </div>
+            </div>
+          | <router-link v-bind:to="{ name: 'ProductManagement' }" class="">PRODUCT MANAGEMENT</router-link>
+        </div>
+        <input type="text" placeholder="Search">
+      </nav>
+    </div>
   </header>
 </template>
 
@@ -95,6 +98,15 @@ header {
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+}
+
+.global-header input[type=text] {
+  float: right;
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
 }
 
 /* Change color of dropdown links on hover */
