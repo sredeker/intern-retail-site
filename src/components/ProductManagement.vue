@@ -32,6 +32,9 @@
           <input type="text" name="price" placeholder="PRICE" v-model="price">
         </div>
         <div>
+          <input type="text" name="img" placeholder="IMAGE PATH" v-model="img">
+        </div>
+        <div>
           <button class="app_post_btn" @click="addProduct">Add</button>
         </div>
       </div>
@@ -48,6 +51,7 @@ export default {
       title: '',
       product: '',
       price: '',
+      img: '',
       category: '',
       categories: []
     }
@@ -73,7 +77,8 @@ export default {
         title: this.product,
         category: this.category,
         url: this.product.replace(/\s+/g, '-').toLowerCase(),
-        price: this.price
+        price: this.price,
+        img: this.img
       })
       this.$router.push({ name: 'Categories' })
     }

@@ -2,7 +2,7 @@
   <div class="posts">
     <h1>{{ currentProduct }}</h1>
     <h2>Price: ${{ price.toFixed(2) }}</h2>
-    <img src="../../build/logo.png">
+    <img :src="img">
     <div>
       <button class="app_post_btn" @click="addPost">Add to cart</button>
     </div>
@@ -58,6 +58,7 @@ export default {
       currentProductURL: this.$route.params.id,
       currentProduct: '',
       price: '',
+      img: '',
       products: [],
       rating: '',
       review: '',
@@ -83,6 +84,7 @@ export default {
         if (this.products[i].url === this.currentProductURL) {
           this.currentProduct = this.products[i].title
           this.price = this.products[i].price
+          this.img = this.products[i].img
         }
       }
       console.log(response.data)

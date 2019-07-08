@@ -1,7 +1,7 @@
 <template>
   <div class="posts">
     <h1>Edit a Product</h1>
-      Choose a Category
+      Choose a Product
       <select v-model="product">
         <option disabled value="">Please select one</option>
         <option v-for="prod in products" :key="prod">{{ prod.title }}</option>
@@ -13,6 +13,9 @@
         </div>
         <div>
           <input type="text" name="price" placeholder="PRICE" v-model="price">
+        </div>
+        <div>
+          <input type="text" name="img" placeholder="IMAGE PATH" v-model="img">
         </div>
         <div>
           <button class="app_post_btn" @click="updateProduct">Update</button>
@@ -28,6 +31,7 @@ export default {
     return {
       title: '',
       price: '',
+      img: '',
       product: '',
       products: [],
       id: '',
@@ -49,7 +53,8 @@ export default {
         title: this.title,
         category: this.category,
         url: this.title.replace(/\s+/g, '-').toLowerCase(),
-        price: this.price
+        price: this.price,
+        img: this.img
       })
       this.$router.push({ name: 'EditProduct' })
     }
@@ -57,9 +62,7 @@ export default {
   watch: {
     product: function () {
       var i
-      console.log('product: ' + this.product)
       for (i = 0; i < this.products.length; i++) {
-        console.log(i + ': ' + this.products[i].title)
         if (this.products[i].title === this.product) {
           this.category = this.products[i].category
           this.id = this.products[i]._id

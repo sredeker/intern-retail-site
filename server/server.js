@@ -32,7 +32,7 @@ app.get('/categories', (req, res) => {
 
 // Fetch all products
 app.get('/products', (req, res) => {
-  Product.find({}, 'title category url price', function (error, products) {
+  Product.find({}, 'title category url price img', function (error, products) {
     if (error) { console.error(error); }
     res.send({
       products: products
@@ -179,11 +179,13 @@ app.post('/products', (req, res) => {
   var category = req.body.category;
   var url = req.body.url;
   var price = req.body.price;
+  var img = req.body.img;
   var new_product = new Product({
     title: title,
     category: category,
     url: url,
-    price: price
+    price: price,
+    img: img
   })
 
   new_product.save(function (error) {
@@ -200,7 +202,7 @@ app.post('/products', (req, res) => {
 // Fetch single product
 app.get('/product/:id', (req, res) => {
   var db = req.db;
-  Product.findById(req.params.id, 'title category url price', function (error, post) {
+  Product.findById(req.params.id, 'title category url price img', function (error, post) {
     if (error) { console.error(error); }
     res.send(product)
   })
@@ -209,13 +211,14 @@ app.get('/product/:id', (req, res) => {
 // Update a product
 app.put('/products/:id', (req, res) => {
   var db = req.db;
-  Product.findById(req.params.id, 'title category url price', function (error, post) {
+  Product.findById(req.params.id, 'title category url price img', function (error, post) {
     if (error) { console.error(error); }
 
     post.title = req.body.title
     post.category = req.body.category
     post.url = req.body.url
     post.price = req.body.price
+    post.img = req.body.img
     post.save(function (error) {
       if (error) {
         console.log(error)
