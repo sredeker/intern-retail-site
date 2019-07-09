@@ -32,7 +32,31 @@
           <input type="text" name="price" placeholder="PRICE" v-model="price">
         </div>
         <div>
-          <input type="text" name="img" placeholder="IMAGE PATH" v-model="img">
+          <input type="text" name="img" placeholder="IMAGE" v-model="img">
+        </div>
+        <select v-model="sizes" multiple>
+          <option>Small</option>
+          <option>Medium</option>
+          <option>Large</option>
+        </select>
+        <br>
+        <span>Selected: {{ sizes }}</span>
+        <br>
+        <select v-model="colors" multiple>
+          <option>Red</option>
+          <option>Blue</option>
+          <option>Black</option>
+        </select>
+        <br>
+        <span>Selected: {{ colors }}</span>
+        <div>
+          <input type="text" name="summary" placeholder="SUMMARY" v-model="summary">
+        </div>
+        <div v-for="i in stock_x" :key="i">
+          {{ colors[i] }}
+          <br>
+          <input  v-for="j in stock_y" :key="j" type="number" v-model="stock[j - 1][i - 1]">
+          <br>
         </div>
         <div>
           <button class="app_post_btn" @click="addProduct">Add</button>
@@ -52,6 +76,12 @@ export default {
       product: '',
       price: '',
       img: '',
+      sizes: [],
+      colors: [],
+      summary: '',
+      stock: [[]],
+      stock_x: Number,
+      stock_y: Number,
       category: '',
       categories: []
     }
@@ -78,9 +108,24 @@ export default {
         category: this.category,
         url: this.product.replace(/\s+/g, '-').toLowerCase(),
         price: this.price,
-        img: this.img
+        img: this.img,
+        sizes: this.sizes,
+        colors: this.colors,
+        summary: this.summary
       })
       this.$router.push({ name: 'Categories' })
+    }
+  },
+  watch: {
+    sizes: function () {
+      this.stock_y = this.sizes.length
+      this.stock = [[]]
+      this.stock = [this.stock_y][this.stock_x]
+    },
+    colors: function () {
+      this.stock_x = this.colors.length
+      this.stock = [[]]
+      this.stock = [this.stock_y][this.stock_x]
     }
   }
 }

@@ -15,7 +15,25 @@
           <input type="text" name="price" placeholder="PRICE" v-model="price">
         </div>
         <div>
-          <input type="text" name="img" placeholder="IMAGE PATH" v-model="img">
+          <input type="text" name="img" placeholder="IMAGE" v-model="img">
+        </div>
+        <select v-model="sizes" multiple>
+          <option>Small</option>
+          <option>Medium</option>
+          <option>Large</option>
+        </select>
+        <br>
+        <span>Selected: {{ sizes }}</span>
+        <br>
+        <select v-model="colors" multiple>
+          <option>Red</option>
+          <option>Blue</option>
+          <option>Black</option>
+        </select>
+        <br>
+        <span>Selected: {{ colors }}</span>
+        <div>
+          <input type="text" name="summary" placeholder="SUMMARY" v-model="summary">
         </div>
         <div>
           <button class="app_post_btn" @click="updateProduct">Update</button>
@@ -32,6 +50,9 @@ export default {
       title: '',
       price: '',
       img: '',
+      sizes: [],
+      colors: [],
+      summary: '',
       product: '',
       products: [],
       id: '',
@@ -54,7 +75,10 @@ export default {
         category: this.category,
         url: this.title.replace(/\s+/g, '-').toLowerCase(),
         price: this.price,
-        img: this.img
+        img: this.img,
+        sizes: this.sizes.toLowerCase().split(' '),
+        colors: this.colors.toLowerCase().split(' '),
+        summary: this.summary
       })
       this.$router.push({ name: 'EditProduct' })
     }
