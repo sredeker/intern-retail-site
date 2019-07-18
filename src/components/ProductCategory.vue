@@ -2,14 +2,29 @@
   <div class="posts">
     <h1>{{ currentCategory }}</h1>
     <div v-if="currProducts.length > 0" class="table-wrap">
-      <table>
-        <tr>
-          <td>Product</td>
-        </tr>
-        <tr v-for="product in currProducts" :key="product">
-          <td><router-link v-bind:to="'/categories/' + currentCategoryURL + '/' + product.url" class="">{{ product.title }}</router-link></td>
-        </tr>
-      </table>
+      <div class="post">
+        <v-container class = "cards">
+            <v-layout row wrap>
+                <v-flex xs12 sm6 md4 lg3 v-for="product in currProducts" :key="product">
+                    <v-card flat class = "text-xs-center ma-3">
+                        <v-responsive class = "pt-4">
+                            <!--<img :src= product.image style="width:400px;height:300px;">-->
+                            <img src="../../build/logo.png" style="width:100px;height:100px;">
+                        </v-responsive>
+                        <v-card-text>
+                            <div class="heading"> {{""}} </div>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-btn flat color = "grey">
+                                <v-icon smal left> <router-link v-bind:to="'/categories/' + currentCategoryURL + '/' + product.url" class="">{{ product.title }}</router-link> </v-icon>
+                                <span> Message </span>
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-flex>
+            </v-layout>
+        </v-container>
+      </div>
     </div>
     <div v-else>
       There are no products in this category<br /><br />
@@ -78,7 +93,7 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss" scoped>
 .app_post_btn {
   background: #4d7ef7;
   color: #fff;
@@ -89,5 +104,10 @@ export default {
   width: 250px;
   border: none;
   cursor: pointer;
+}
+
+.text-xs-center ma-3 {
+    max-height: 300px;
+    width: 400px;
 }
 </style>
