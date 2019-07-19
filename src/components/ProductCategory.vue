@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>{{ currentCategory }}</h1>
-    <div v-if="currProducts.length > 0" class="table-wrap">
+    <div v-if="currProducts.length > 0">
       <div class="post">
         <v-container class = "cards">
             <v-layout row wrap>
@@ -12,7 +12,6 @@
                             <img src="../../build/logo.png" style="width:100px;height:100px;">
                         </v-responsive>
                         <v-card-text>
-                            <div class="heading"> {{""}} </div>
                         </v-card-text>
                         <v-card-actions>
                             <v-btn flat color = "grey">
