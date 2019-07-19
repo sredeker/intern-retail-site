@@ -1,5 +1,5 @@
 <template>
-  <div class="posts">
+  <div>
     <h1>{{ currentCategory }}</h1>
     <div v-if="currProducts.length > 0" class="table-wrap">
       <div class="post">
