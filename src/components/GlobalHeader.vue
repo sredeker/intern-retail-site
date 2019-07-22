@@ -24,8 +24,8 @@
       <!-- Main Nav -->
       <nav class="main-nav" v-if="categories.length > 0">
         <ul>
-          <li>
-            <router-link v-for="category in categories" :key="category" v-bind:to="'/categories/' + category.url" class="" @click="reloadPage()">{{ category.title }}</router-link>
+          <li v-for="category in categories" :key="category">
+            <router-link v-bind:to="'/categories/' + category.url" class="" @click="reloadPage()">{{ category.title }}</router-link>
           </li>
         </ul>
       </nav>
@@ -124,6 +124,7 @@ $promobarHeight: 35px !default;
     font-weight: bold;
     text-transform: uppercase;
     font-family: get-font('NeueHelveticaVFDPCond');
+    text-decoration: none;
   }
 }
 
