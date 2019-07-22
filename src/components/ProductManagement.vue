@@ -34,7 +34,7 @@
         <div>
           <input type="text" name="img" placeholder="IMAGE" v-model="img">
         </div>
-        <select v-model="sizes" multiple>
+        <select multiple v-model="sizes">
           <option>Small</option>
           <option>Medium</option>
           <option>Large</option>
@@ -42,7 +42,7 @@
         <br>
         <span>Selected: {{ sizes }}</span>
         <br>
-        <select v-model="colors" multiple>
+        <select multiple v-model="colors">
           <option>Red</option>
           <option>Blue</option>
           <option>Black</option>
@@ -53,9 +53,9 @@
           <input type="text" name="summary" placeholder="SUMMARY" v-model="summary">
         </div>
         <div v-for="i in stock_x" :key="i">
-          {{ colors[i] }}
+          {{ colors[i - 1] }}
           <br>
-          <input  v-for="j in stock_y" :key="j" type="number" v-model="stock[j - 1][i - 1]">
+          <!-- ><input v-for="j in stock_y" :key="j" type="number" v-model="stock[j - 1][i - 1]"><-->
           <br>
         </div>
         <div>
@@ -111,7 +111,8 @@ export default {
         img: this.img,
         sizes: this.sizes,
         colors: this.colors,
-        summary: this.summary
+        summary: this.summary,
+        stock: this.stock
       })
       this.$router.push({ name: 'Categories' })
     }

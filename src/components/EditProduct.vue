@@ -17,7 +17,7 @@
         <div>
           <input type="text" name="img" placeholder="IMAGE" v-model="img">
         </div>
-        <select v-model="sizes" multiple>
+        <select v-model="sizes" multiple="true">
           <option>Small</option>
           <option>Medium</option>
           <option>Large</option>
@@ -25,7 +25,7 @@
         <br>
         <span>Selected: {{ sizes }}</span>
         <br>
-        <select v-model="colors" multiple>
+        <select v-model="colors" multiple="true">
           <option>Red</option>
           <option>Blue</option>
           <option>Black</option>
