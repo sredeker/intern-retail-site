@@ -2,7 +2,23 @@
   <div class="posts">
     <h1>{{ currentProduct }}</h1>
     <h2>Price: ${{ price.toFixed(2) }}</h2>
-    <img src="../../build/logo.png">
+    <img :src="img">
+    <h4>
+    Choose a Color
+      <select v-model="color">
+        <option disabled value="">Please select one</option>
+        <option v-for="col in colors" :key="col">{{ col }}</option>
+      </select>
+      <span>Selected: {{ color }}</span>
+    </h4>
+    <h4>
+    Choose a Size
+      <select v-model="size">
+        <option disabled value="">Please select one</option>
+        <option v-for="siz in sizes" :key="siz">{{ siz }}</option>
+      </select>
+      <span>Selected: {{ size }}</span>
+    </h4>
     <div>
       <button class="app_post_btn" @click="addPost">Add to cart</button>
     </div>
@@ -58,10 +74,15 @@ export default {
       currentProductURL: this.$route.params.id,
       currentProduct: '',
       price: '',
+      img: '',
       products: [],
       rating: '',
       review: '',
-      reviews: []
+      reviews: [],
+      color: '',
+      colors: [],
+      size: '',
+      sizes: []
     }
   },
   mounted () {
@@ -83,6 +104,9 @@ export default {
         if (this.products[i].url === this.currentProductURL) {
           this.currentProduct = this.products[i].title
           this.price = this.products[i].price
+          this.img = this.products[i].img
+          this.colors = this.products[i].colors
+          this.sizes = this.products[i].sizes
         }
       }
       console.log(response.data)

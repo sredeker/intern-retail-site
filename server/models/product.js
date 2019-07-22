@@ -5,7 +5,12 @@ var ProductSchema = new Schema({
   title: String,
   category: String,
   url: String,
-  price: Number
+  price: Number,
+  img: String,
+  sizes: [],
+  colors: [],
+  summary: String,
+  stock: [[]]
 });
 
 var Product = mongoose.model("Product", ProductSchema);

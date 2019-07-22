@@ -3,7 +3,9 @@ var Schema = mongoose.Schema;
 
 var PostSchema = new Schema({
   title: String,
-  description: Number
+  description: Number,
+  size: String,
+  color: String
 });
 
 var Post = mongoose.model("Post", PostSchema);
