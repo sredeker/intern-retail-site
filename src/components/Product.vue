@@ -7,7 +7,7 @@
     Choose a Color
       <select v-model="color">
         <option disabled value="">Please select one</option>
-        <option v-for="col in colors" :key="col">{{ col }}</option>
+        <option v-for="col in colors" :key="col" :value="col.color" v-if="col.inventory > 0">{{ col.color }} - {{ col.inventory }} in stock!</option>
       </select>
       <span>Selected: {{ color }}</span>
     </h4>
@@ -82,7 +82,7 @@ export default {
   methods: {
     async addPost () {
       await PostsService.addPost({
-        title: this.currentProduct,
+        title: this.currentProduct + ' - ' + this.color,
         description: this.price
       })
     },

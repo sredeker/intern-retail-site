@@ -44,10 +44,10 @@
         <div>
           <input type="text" name="summary" placeholder="SUMMARY" v-model="summary">
         </div>
-        <div v-for="i in stock_x" :key="i">
-          {{ colors[i - 1] }}
+        <div v-for="i in colors.length" :key="i">
+          {{ colors[i - 1] }} Inventory
           <br>
-          <input type="text" name="price" placeholder="PRICE" v-model="price">
+          <input type="text" name="inventory" placeholder="INVENTORY" v-model="stock[i - 1]">
           <br>
         </div>
         <div>
@@ -70,8 +70,7 @@ export default {
       img: '',
       colors: [],
       summary: '',
-      stock: [[]],
-      stock_x: Number,
+      stock: [],
       category: '',
       categories: []
     }
@@ -93,13 +92,21 @@ export default {
       this.$router.push({ name: 'Categories' })
     },
     async addProduct () {
+      var colorsStock = [this.colors.length]
+      var i
+      for (i = 0; i < this.colors.length; i++) {
+        colorsStock[i] = {
+          'color': this.colors[i],
+          'inventory': this.stock[i]
+        }
+      }
       await ProductsService.addProduct({
         title: this.product,
         category: this.category,
         url: this.product.replace(/\s+/g, '-').toLowerCase(),
         price: this.price,
         img: this.img,
-        colors: this.colors,
+        colors: colorsStock,
         summary: this.summary,
         stock: this.stock
       })
@@ -108,9 +115,8 @@ export default {
   },
   watch: {
     colors: function () {
-      this.stock_x = this.colors.length
-      this.stock = [[]]
-      this.stock = [this.stock_y][this.stock_x]
+      this.stock = []
+      this.stock = [this.colors.length]
     }
   }
 }
