@@ -9,7 +9,7 @@
                     <v-card flat class = "text-xs-center ma-3">
                         <v-responsive class = "pt-4">
                             <!--<img :src= product.image style="width:400px;height:300px;">-->
-                            <img src="../../build/logo.png" style="width:100px;height:100px;">
+                            <img src="../../build/shirt1.png" style="width:300px;height:400px;">
                         </v-responsive>
                         <v-card-text>
                         </v-card-text>
@@ -24,6 +24,73 @@
             </v-layout>
         </v-container>
       </div>
+      <div class="post">
+        <v-container class = "cards">
+            <v-layout row wrap>
+                <v-flex xs12 sm6 md4 lg3 v-for="product in currProducts" :key="product">
+                    <v-card flat class = "text-xs-center ma-3">
+                        <v-responsive class = "pt-4">
+                            <!--<img :src= product.image style="width:400px;height:300px;">-->
+                            <img src="../../build/shirt2.png" style="width:300px;height:400px;">
+                        </v-responsive>
+                        <v-card-text>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-btn flat color = "grey">
+                                <v-icon smal left> <router-link v-bind:to="'/categories/' + currentCategoryURL + '/' + product.url" class="">{{ product.title }}</router-link> </v-icon>
+                                <span> Message </span>
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-flex>
+            </v-layout>
+        </v-container>
+      </div>
+      <div class="post">
+        <v-container class = "cards">
+            <v-layout row wrap>
+                <v-flex xs12 sm6 md4 lg3 v-for="product in currProducts" :key="product">
+                    <v-card flat class = "text-xs-center ma-3">
+                        <v-responsive class = "pt-4">
+                            <!--<img :src= product.image style="width:400px;height:300px;">-->
+                            <img src="../../build/shirt3.png" style="width:300px;height:400px;">
+                        </v-responsive>
+                        <v-card-text>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-btn flat color = "grey">
+                                <v-icon smal left> <router-link v-bind:to="'/categories/' + currentCategoryURL + '/' + product.url" class="">{{ product.title }}</router-link> </v-icon>
+                                <span> Message </span>
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-flex>
+            </v-layout>
+        </v-container>
+      </div>
+      <div class="post">
+        <v-container class = "cards">
+            <v-layout row wrap>
+                <v-flex xs12 sm6 md4 lg3 v-for="product in currProducts" :key="product">
+                    <v-card flat class = "text-xs-center ma-3">
+                        <v-responsive class = "pt-4">
+                            <!--<img :src= product.image style="width:400px;height:300px;">-->
+                            <img src="../../build/shirt4.png" style="width:300px;height:400px;">
+                        </v-responsive>
+                        <v-card-text>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-btn flat color = "grey">
+                                <v-icon smal left> <router-link v-bind:to="'/categories/' + currentCategoryURL + '/' + product.url" class="">{{ product.title }}</router-link> </v-icon>
+                                <span> Message </span>
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-flex>
+            </v-layout>
+        </v-container>
+      </div>
+
     </div>
     <div v-else>
       There are no products in this category<br /><br />
