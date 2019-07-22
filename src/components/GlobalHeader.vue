@@ -4,9 +4,9 @@
       <!-- Utility Nav -->
       <div class="utility-nav">
         <div class="headerlinks">
-          <router-link v-bind:to="{ name: 'Home' }" class="">HOME</router-link>
-          | <router-link v-bind:to="{ name: 'Cart' }" class="">CART</router-link>
-          | <router-link v-bind:to="{ name: 'ProductManagement' }" class="">PRODUCT MANAGEMENT</router-link>
+          <router-link v-bind:to="{ name: 'Home' }" style="color:#000" class="">Home</router-link>
+          | <router-link v-bind:to="{ name: 'Cart' }" style="color:#000" class="">Cart</router-link>
+          | <router-link v-bind:to="{ name: 'ProductManagement' }" style="color:#000" class="">Product Management</router-link>
         </div>
         <div class="search-container" role="search">
           <form action="/action_page.php">
@@ -130,6 +130,9 @@ $promobarHeight: 35px !default;
 
 .utility-nav {
   float:right;
+  font-family: Helvetica;
+  font-size: 14px;
+  color: black;
 }
 
 .headerlinks {
