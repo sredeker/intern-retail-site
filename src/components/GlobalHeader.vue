@@ -1,19 +1,11 @@
 <template>
-  <header>
-    <div id="global-header">
-      <div class="logo">
-        <img @click="goToHome()" src="../assets/nf-logo.png" style="width:128px;height:128px;">
-      </div>
-      <nav>
+  <header id="global-header">
+
+      <!-- Utility Nav -->
+      <div class="utility-nav">
         <div class="headerlinks">
           <router-link v-bind:to="{ name: 'Home' }" class="">HOME</router-link>
           | <router-link v-bind:to="{ name: 'Cart' }" class="">CART</router-link>
-          | <div class="dropdown">
-              <button class="dropbtn"><router-link v-bind:to="{ name: 'Categories' }" class="">CATEGORIES</router-link></button>
-                <div v-if="categories.length > 0" class="dropdown-content">
-                  <router-link v-for="category in categories" :key="category" v-bind:to="'/categories/' + category.url" class="" @click="reloadPage()">{{ category.title }}</router-link>
-                </div>
-            </div>
           | <router-link v-bind:to="{ name: 'ProductManagement' }" class="">PRODUCT MANAGEMENT</router-link>
         </div>
         <div class="search-container" role="search">
@@ -22,8 +14,26 @@
             <button type="submit"><i class="fa fa-search"></i></button>
           </form>
         </div>
+      </div>
+
+      <!-- Utility Nav -->
+      <div class="logo">
+        <img @click="goToHome()" src="../assets/tnf-logo.svg">
+      </div>
+
+      <!-- Main Nav -->
+      <nav class="main-nav" v-if="categories.length > 0">
+        <ul>
+          <li>
+            <router-link v-for="category in categories" :key="category" v-bind:to="'/categories/' + category.url" class="" @click="reloadPage()">{{ category.title }}</router-link>
+          </li>
+        </ul>
       </nav>
-    </div>
+
+      <!-- PromoBar -->
+      <div class="promobar">
+        <div class="message">Free Shipping & Free Returns</div>
+      </div>
   </header>
 </template>
 
@@ -63,8 +73,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-header {
+$logoWidth: 113px;
+$logoHeight: 55px;
+$promobarHeight: 35px !default;
+
+#global-header {
  @include clearfix;
+ height: 100px;
+ position: relative;
 }
 
 .global-header {
@@ -73,7 +89,46 @@ header {
 }
 
 .logo {
-  float: left;
+  position: absolute;
+  bottom:$promobarHeight;
+  height: $logoHeight;
+  width: $logoWidth;
+  padding-bottom: column-gutter()/2;
+
+  img {
+      width:100%;
+      height: 100%;
+  }
+}
+
+.main-nav {
+  float:left;
+  position: absolute;
+  bottom: $promobarHeight;
+  left: $logoWidth;
+  padding: 0 column-gutter() column-gutter()/2;
+
+  ul {
+    list-style: none;
+  }
+
+  li {
+   display: inline-block;
+   float: left;
+   padding: 0 column-gutter()/2;
+  }
+
+  a {
+    color: $black;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: get-font('NeueHelveticaVFDPCond');
+  }
+}
+
+.utility-nav {
+  float:right;
 }
 
 .headerlinks {
@@ -81,6 +136,24 @@ header {
 }
 
 .headerlinks a:hover {color: #ff0000}
+
+.promobar {
+    @include clearfix;
+    position: absolute;
+    bottom: 0;
+    width:100%;
+    background: $black;
+    color: $white;
+    text-align: center;
+    height: $promobarHeight;
+    text-transform:uppercase;
+    font-size:11px;
+    font-weight: bold;
+
+    .message {
+      margin-top:10px;
+    }
+}
 
 /* Dropdown Button */
 .dropbtn {

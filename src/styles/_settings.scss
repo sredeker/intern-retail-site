@@ -69,16 +69,71 @@
 //$global-width: rem-calc(1200);
 //$global-lineheight: 1.5;
 $foundation-palette: (
-  black: #2c3e50,
-  white: #fefefe,
-  light-gray: #e6e6e6,
-  medium-gray: #cacaca,
-  dark-gray: #8a8a8a,
-  primary: #1779ba,
-  secondary: #767676,
-  success: #3adb76,
-  warning: #ffae00,
-  alert: #cc4b37,
+  black: #000,
+  white: #fff,
+  light-gray: #ccc,
+  medium-gray: #aaa,
+  dark-gray: #2a2a2a,
+  primary: rgb(231, 43, 30),
+  secondary: #2a2a2a,
+  success: #00bf43,
+  warning: #dfede5,
+  alert: #eac6c5,
+  //////////////////////////
+  // brand specific colors
+  //////////////////////////
+  alice-blue: #ebeff1,
+  alizarin: #ed1b2a,
+  bokara-grey: #11100f,
+  dark-gray-2: #afaeae,
+  dark-pastel-green: #00be43,
+  dim-gray: #666,
+  elm: #1b897f,
+  feta: #d8d9d5,
+  feta-2: #dcddda,
+  golden-tainoi: #ffc05b,
+  granny-apple: #bee5cc,
+  light-grey: #d4d4d4,
+  lochmara: #369,
+  mantis: #7cc74c,
+  medium-dark-gray: #959595,
+  mid-grey: #64686b,
+  mountain-meadow: #10b782,
+  narvik: #e9e7dd,
+  navy-blue: #0b7bc1,
+  nero: #2a2a2a,
+  nobel: #a1a0a0,
+  nobel-2: #999,
+  orange-red: #f24609,
+  quartz: #d6d8f0,
+  semi-medium-gray: #dbddda,
+  sky-blue: #85bee3,
+  suva-grey: #939393,
+  suva-grey-2: #929292,
+  swamp: #1a2a2a,
+  tnf-gainsboro: #e0e0e0,
+  tnf-gainsboro-2: #e2e2e2,
+  tnf-gainsboro-3: #dadada,
+  tnf-gainsboro-4: #ddd,
+  tnf-gold: #ffd300,
+  tnf-grey: #888,
+  tnf-grey-2: #7f7f7f,
+  tnf-grey-3: #7d7b7b,
+  tnf-grey-4: #777,
+  tnf-silver: #bebebe,
+  tnf-snow: #fef4f4,
+  torch-red: #ff0019,
+  very-light-grey: #cbcbcb,
+  very-light-grey-2: #c7c7c7,
+  very-light-grey-3: #cacaca,
+  whisper: #eee,
+  whisper-2: #ededed,
+  whisper-3: #e9e9e9,
+  whisper-4: #ebebeb,
+  white-smoke: #f8f8f8,
+  white-smoke-2: #f0f0f0,
+  white-smoke-3: #f6f6f6,
+  white-smoke-4: #f3eeee,
   vuejs_green: #42b983
 );
 $light-gray: get-color(light-gray);
@@ -87,8 +142,8 @@ $dark-gray: get-color(dark-gray);
 $black: get-color(black);
 $white: get-color(white);
 //$body-background: $white;
-//$body-font-color: $black;
-$body-font-family: 'Avenir', Helvetica, Arial, sans-serif;
+$body-font-color: get-color(secondary);
+$body-font-family: Helvetica, Arial, sans-serif;
 //$body-antialiased: true;
 //$global-margin: 1rem;
 //$global-padding: 1rem;
@@ -125,10 +180,9 @@ $global-flexbox: true;
 
 //$grid-row-width: $global-width;
 //$grid-column-count: 12;
-//$grid-column-gutter: (
-//  small: 20px,
-//  medium: 30px,
-//);
+$grid-column-gutter: (
+  small: 20px
+);
 //$grid-column-align-edge: true;
 //$grid-column-alias: 'columns';
 //$block-grid-max: 8;
@@ -173,8 +227,8 @@ $global-flexbox: true;
 //$code-background: $light-gray;
 //$code-border: 1px solid $medium-gray;
 //$code-padding: rem-calc(2 5 1);
-//$anchor-color: $primary-color;
-//$anchor-color-hover: scale-color($anchor-color, $lightness: -14%);
+$anchor-color: get-color(secondary);
+$anchor-color-hover: get-color(primary);
 //$anchor-text-decoration: none;
 //$anchor-text-decoration-hover: none;
 //$hr-width: $global-width;

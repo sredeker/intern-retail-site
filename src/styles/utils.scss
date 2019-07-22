@@ -1,0 +1,7 @@
+// Supports one simple way to get colum gutters
+@function column-gutter($size: small) {
+  @if not map-has-key($grid-column-gutter, $size) {
+    @error '$grid-column-gutter does not contain a "#{$size}" size';
+  }
+  @return map-get($grid-column-gutter, $size);
+}
