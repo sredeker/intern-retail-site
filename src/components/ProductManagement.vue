@@ -34,14 +34,6 @@
         <div>
           <input type="text" name="img" placeholder="IMAGE" v-model="img">
         </div>
-        <select multiple v-model="sizes">
-          <option>Small</option>
-          <option>Medium</option>
-          <option>Large</option>
-        </select>
-        <br>
-        <span>Selected: {{ sizes }}</span>
-        <br>
         <select multiple v-model="colors">
           <option>Red</option>
           <option>Blue</option>
@@ -55,7 +47,7 @@
         <div v-for="i in stock_x" :key="i">
           {{ colors[i - 1] }}
           <br>
-          <!-- ><input v-for="j in stock_y" :key="j" type="number" v-model="stock[j - 1][i - 1]"><-->
+          <input type="text" name="price" placeholder="PRICE" v-model="price">
           <br>
         </div>
         <div>
@@ -76,12 +68,10 @@ export default {
       product: '',
       price: '',
       img: '',
-      sizes: [],
       colors: [],
       summary: '',
       stock: [[]],
       stock_x: Number,
-      stock_y: Number,
       category: '',
       categories: []
     }
@@ -109,7 +99,6 @@ export default {
         url: this.product.replace(/\s+/g, '-').toLowerCase(),
         price: this.price,
         img: this.img,
-        sizes: this.sizes,
         colors: this.colors,
         summary: this.summary,
         stock: this.stock
@@ -118,11 +107,6 @@ export default {
     }
   },
   watch: {
-    sizes: function () {
-      this.stock_y = this.sizes.length
-      this.stock = [[]]
-      this.stock = [this.stock_y][this.stock_x]
-    },
     colors: function () {
       this.stock_x = this.colors.length
       this.stock = [[]]

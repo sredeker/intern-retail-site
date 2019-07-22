@@ -17,12 +17,6 @@
         <div>
           <input type="text" name="img" placeholder="IMAGE" v-model="img">
         </div>
-        <select v-model="sizes" multiple="true">
-          <option>Small</option>
-          <option>Medium</option>
-          <option>Large</option>
-        </select>
-        <br>
         <span>Selected: {{ sizes }}</span>
         <br>
         <select v-model="colors" multiple="true">
@@ -50,7 +44,6 @@ export default {
       title: '',
       price: '',
       img: '',
-      sizes: [],
       colors: [],
       summary: '',
       product: '',
@@ -76,7 +69,6 @@ export default {
         url: this.title.replace(/\s+/g, '-').toLowerCase(),
         price: this.price,
         img: this.img,
-        sizes: this.sizes.toLowerCase().split(' '),
         colors: this.colors.toLowerCase().split(' '),
         summary: this.summary
       })
