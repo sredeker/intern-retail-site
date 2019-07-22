@@ -17,15 +17,7 @@
         <div>
           <input type="text" name="img" placeholder="IMAGE" v-model="img">
         </div>
-        <select v-model="sizes" multiple>
-          <option>Small</option>
-          <option>Medium</option>
-          <option>Large</option>
-        </select>
-        <br>
-        <span>Selected: {{ sizes }}</span>
-        <br>
-        <select v-model="colors" multiple>
+        <select v-model="colors" multiple="true">
           <option>Red</option>
           <option>Blue</option>
           <option>Black</option>
@@ -34,6 +26,12 @@
         <span>Selected: {{ colors }}</span>
         <div>
           <input type="text" name="summary" placeholder="SUMMARY" v-model="summary">
+        </div>
+        <div v-for="i in colors.length" :key="i">
+          {{ colors[i - 1] }} Inventory
+          <br>
+          <input type="text" name="inventory" placeholder="INVENTORY" v-model="stock[i - 1]">
+          <br>
         </div>
         <div>
           <button class="app_post_btn" @click="updateProduct">Update</button>
@@ -50,9 +48,9 @@ export default {
       title: '',
       price: '',
       img: '',
-      sizes: [],
       colors: [],
       summary: '',
+      stock: [],
       product: '',
       products: [],
       id: '',
@@ -69,6 +67,14 @@ export default {
       console.log(response.data)
     },
     async updateProduct () {
+      var colorsStock = [this.colors.length]
+      var i
+      for (i = 0; i < this.colors.length; i++) {
+        colorsStock[i] = {
+          'color': this.colors[i],
+          'inventory': this.stock[i]
+        }
+      }
       await ProductsService.updateProduct({
         id: this.id,
         title: this.title,
@@ -76,9 +82,9 @@ export default {
         url: this.title.replace(/\s+/g, '-').toLowerCase(),
         price: this.price,
         img: this.img,
-        sizes: this.sizes.toLowerCase().split(' '),
-        colors: this.colors.toLowerCase().split(' '),
-        summary: this.summary
+        colors: colorsStock,
+        summary: this.summary,
+        stock: this.stock
       })
       this.$router.push({ name: 'EditProduct' })
     }
@@ -92,6 +98,10 @@ export default {
           this.id = this.products[i]._id
         }
       }
+    },
+    colors: function () {
+      this.stock = []
+      this.stock = [this.colors.length]
     }
   }
 }

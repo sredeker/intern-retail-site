@@ -32,7 +32,7 @@ app.get('/categories', (req, res) => {
 
 // Fetch all products
 app.get('/products', (req, res) => {
-  Product.find({}, 'title category url price img sizes colors summary stock', function (error, products) {
+  Product.find({}, 'title category url price img colors summary stock', function (error, products) {
     if (error) { console.error(error); }
     res.send({
       products: products
@@ -186,7 +186,6 @@ app.post('/products', (req, res) => {
   var url = req.body.url;
   var price = req.body.price;
   var img = req.body.img;
-  var sizes = req.body.sizes;
   var colors = req.body.colors;
   var summary = req.body.summary;
   var stock = req.body.stock;
@@ -196,7 +195,7 @@ app.post('/products', (req, res) => {
     url: url,
     price: price,
     img: img,
-    sizes: sizes,
+    colors: colors,
     summary: summary,
     stock: stock
   })
@@ -215,7 +214,7 @@ app.post('/products', (req, res) => {
 // Fetch single product
 app.get('/product/:id', (req, res) => {
   var db = req.db;
-  Product.findById(req.params.id, 'title category url price img sizes colors summary stock', function (error, post) {
+  Product.findById(req.params.id, 'title category url price img colors summary stock', function (error, post) {
     if (error) { console.error(error); }
     res.send(product)
   })
@@ -224,7 +223,7 @@ app.get('/product/:id', (req, res) => {
 // Update a product
 app.put('/products/:id', (req, res) => {
   var db = req.db;
-  Product.findById(req.params.id, 'title category url price img sizes colors summary stock', function (error, post) {
+  Product.findById(req.params.id, 'title category url price img colors summary stock', function (error, post) {
     if (error) { console.error(error); }
 
     post.title = req.body.title
@@ -232,7 +231,6 @@ app.put('/products/:id', (req, res) => {
     post.url = req.body.url
     post.price = req.body.price
     post.img = req.body.img
-    post.sizes = req.body.sizes
     post.colors = req.body.colors
     post.summary = req.body.summary
     post.stock = req.body.stock

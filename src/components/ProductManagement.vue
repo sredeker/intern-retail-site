@@ -34,15 +34,7 @@
         <div>
           <input type="text" name="img" placeholder="IMAGE" v-model="img">
         </div>
-        <select v-model="sizes" multiple>
-          <option>Small</option>
-          <option>Medium</option>
-          <option>Large</option>
-        </select>
-        <br>
-        <span>Selected: {{ sizes }}</span>
-        <br>
-        <select v-model="colors" multiple>
+        <select multiple v-model="colors">
           <option>Red</option>
           <option>Blue</option>
           <option>Black</option>
@@ -52,10 +44,10 @@
         <div>
           <input type="text" name="summary" placeholder="SUMMARY" v-model="summary">
         </div>
-        <div v-for="i in stock_x" :key="i">
-          {{ colors[i] }}
+        <div v-for="i in colors.length" :key="i">
+          {{ colors[i - 1] }} Inventory
           <br>
-          <input  v-for="j in stock_y" :key="j" type="number" v-model="stock[j - 1][i - 1]">
+          <input type="text" name="inventory" placeholder="INVENTORY" v-model="stock[i - 1]">
           <br>
         </div>
         <div>
@@ -76,12 +68,9 @@ export default {
       product: '',
       price: '',
       img: '',
-      sizes: [],
       colors: [],
       summary: '',
-      stock: [[]],
-      stock_x: Number,
-      stock_y: Number,
+      stock: [],
       category: '',
       categories: []
     }
@@ -103,29 +92,31 @@ export default {
       this.$router.push({ name: 'Categories' })
     },
     async addProduct () {
+      var colorsStock = [this.colors.length]
+      var i
+      for (i = 0; i < this.colors.length; i++) {
+        colorsStock[i] = {
+          'color': this.colors[i],
+          'inventory': this.stock[i]
+        }
+      }
       await ProductsService.addProduct({
         title: this.product,
         category: this.category,
         url: this.product.replace(/\s+/g, '-').toLowerCase(),
         price: this.price,
         img: this.img,
-        sizes: this.sizes,
-        colors: this.colors,
-        summary: this.summary
+        colors: colorsStock,
+        summary: this.summary,
+        stock: this.stock
       })
       this.$router.push({ name: 'Categories' })
     }
   },
   watch: {
-    sizes: function () {
-      this.stock_y = this.sizes.length
-      this.stock = [[]]
-      this.stock = [this.stock_y][this.stock_x]
-    },
     colors: function () {
-      this.stock_x = this.colors.length
-      this.stock = [[]]
-      this.stock = [this.stock_y][this.stock_x]
+      this.stock = []
+      this.stock = [this.colors.length]
     }
   }
 }
