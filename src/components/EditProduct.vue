@@ -37,7 +37,8 @@
           <br>
         </div>
         <div>
-          <button class="app_post_btn" @click="updateProduct">Update</button>
+          <button class="app_post_btn" :disabled="!product || !title || !prices ||
+            !img || !colors || !summary || !stock" @click="updateProduct">Update</button>
         </div>
       </div>
   </div>

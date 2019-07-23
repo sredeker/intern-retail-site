@@ -13,7 +13,7 @@
           <input type="text" name="title" placeholder="TITLE" v-model="title">
         </div>
         <div>
-          <button class="app_post_btn" @click="addCategory">Add</button>
+          <button class="app_post_btn" :disabled="!title" @click="addCategory">Add</button>
         </div>
       </div>
     <div v-if="categories.length > 0" class="table-wrap">
@@ -54,7 +54,8 @@
           <br>
         </div>
         <div>
-          <button class="app_post_btn" @click="addProduct">Add</button>
+          <button class="app_post_btn" :disabled="!category || !product || !prices ||
+            !img || !colors || !summary || !stock" @click="addProduct">Add</button>
         </div>
       </div>
     </div>

@@ -7,12 +7,12 @@
     Choose a Color
       <select v-model="color">
         <option disabled value="">Please select one</option>
-        <option v-for="col in colors" :key="col" :value="col.color" v-if="col.inventory > 0">{{ col.color }} - {{ col.inventory }} in stock!</option>
+        <option v-for="col in colors_filtered" :key="col" :value="col.color">{{ col.color }} - {{ col.inventory }} in stock!</option>
       </select>
       <span>Selected: {{ color }}</span>
     </h4>
     <div>
-      <button class="app_post_btn" @click="addPost">Add to cart</button>
+      <button class="app_post_btn" :disabled="!color" @click="addPost">Add to cart</button>
     </div>
     <h3>Rating: {{ calculateRating }}</h3>
     <h2>Add a Review:</h2>
@@ -31,7 +31,7 @@
           <input type="text" name="review" placeholder="WRITE REVIEW" v-model="review">
         </div>
         <div>
-          <button class="app_post_btn" @click="addReview">Add</button>
+          <button class="app_post_btn" :disabled="!rating" @click="addReview">Add</button>
         </div>
       </div>
     <div v-if="reviews.length > 0" class="table-wrap">
@@ -137,6 +137,16 @@ export default {
         return total / i
       }
       return 'N/A'
+    },
+    colors_filtered () {
+      var array = []
+      var i
+      for (i = 0; i < this.colors.length; i++) {
+        if (this.colors[i].inventory > 0) {
+          array.push(this.colors[i])
+        }
+      }
+      return array
     }
   }
 }
