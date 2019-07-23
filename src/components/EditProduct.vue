@@ -17,13 +17,16 @@
         <div>
           <input type="text" name="img" placeholder="IMAGE" v-model="img">
         </div>
-        <select v-model="colors" multiple="true">
-          <option>Red</option>
-          <option>Blue</option>
-          <option>Black</option>
-        </select>
-        <br>
-        <span>Selected: {{ colors }}</span>
+        <div id='color-checkbox'>
+          <input type="checkbox" id="red" value="Red" v-model="colors">
+          <label for="jack">Red</label>
+          <input type="checkbox" id="blue" value="Blue" v-model="colors">
+          <label for="john">Blue</label>
+          <input type="checkbox" id="black" value="Black" v-model="colors">
+          <label for="mike">Black</label>
+          <br>
+          <span>Checked colors: {{ colors }}</span>
+        </div>
         <div>
           <input type="text" name="summary" placeholder="SUMMARY" v-model="summary">
         </div>
