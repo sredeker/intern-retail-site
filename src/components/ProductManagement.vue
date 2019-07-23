@@ -13,7 +13,7 @@
           <input type="text" name="title" placeholder="TITLE" v-model="title">
         </div>
         <div>
-          <button class="app_post_btn" @click="addCategory">Add</button>
+          <button class="app_post_btn" :disabled="!title" @click="addCategory">Add</button>
         </div>
       </div>
     <div v-if="categories.length > 0" class="table-wrap">
@@ -34,13 +34,16 @@
         <div>
           <input type="text" name="img" placeholder="IMAGE" v-model="img">
         </div>
-        <select multiple v-model="colors">
-          <option>Red</option>
-          <option>Blue</option>
-          <option>Black</option>
-        </select>
-        <br>
-        <span>Selected: {{ colors }}</span>
+        <div id='color-checkbox'>
+          <input type="checkbox" id="red" value="Red" v-model="colors">
+          <label for="jack">Red</label>
+          <input type="checkbox" id="blue" value="Blue" v-model="colors">
+          <label for="john">Blue</label>
+          <input type="checkbox" id="black" value="Black" v-model="colors">
+          <label for="mike">Black</label>
+          <br>
+          <span>Checked colors: {{ colors }}</span>
+        </div>
         <div>
           <input type="text" name="summary" placeholder="SUMMARY" v-model="summary">
         </div>
@@ -51,7 +54,8 @@
           <br>
         </div>
         <div>
-          <button class="app_post_btn" @click="addProduct">Add</button>
+          <button class="app_post_btn" :disabled="!category || !product || !prices ||
+            !img || !colors || !summary || !stock" @click="addProduct">Add</button>
         </div>
       </div>
     </div>
