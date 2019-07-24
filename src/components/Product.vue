@@ -3,6 +3,8 @@
     <h1>{{ currentProduct }}</h1>
     <h2>Price: ${{ price.toFixed(2) }}</h2>
     <img :src="img">
+    <br>
+    Summary: {{ summary }}
     <h4>
     Choose a Color
       <select v-model="color">
@@ -72,7 +74,8 @@ export default {
       review: '',
       reviews: [],
       color: '',
-      colors: []
+      colors: [],
+      summary: ''
     }
   },
   mounted () {
@@ -96,6 +99,8 @@ export default {
           this.price = this.products[i].price
           this.img = this.products[i].img
           this.colors = this.products[i].colors
+          this.summary = this.products[i].summary
+          break
         }
       }
       console.log(response.data)
